@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 const tabs = [
   { id: 'tab-1', title: 'Tab 1', content: 'Some text 1' },
@@ -7,12 +7,11 @@ const tabs = [
 ];
 
 export const TabsPage = () => {
-  const { tabId } = useParams();
-
+  const { tabId } = useParams<{ tabId: string }>();
   const activeTab = tabs.find(tab => tab.id === tabId);
 
   return (
-    <>
+    <div className="container" data-cy="TabsPage">
       <h1 className="title">Tabs page</h1>
 
       <div className="tabs is-boxed">
@@ -30,8 +29,12 @@ export const TabsPage = () => {
       </div>
 
       <div className="block" data-cy="TabContent">
-        {activeTab ? activeTab.content : 'Please select a tab'}
+        {tabId
+          ? activeTab
+            ? activeTab.content
+            : 'Please select a tab'
+          : 'Please select a tab'}
       </div>
-    </>
+    </div>
   );
 };

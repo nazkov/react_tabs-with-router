@@ -1,8 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
 
-export const NavBar = () => {
+export const Navbar = () => {
   const location = useLocation();
-  const path = location.pathname;
+  const isHome = location.pathname === '/';
+  const isTabs = location.pathname.startsWith('/tabs');
 
   return (
     <nav
@@ -13,7 +14,7 @@ export const NavBar = () => {
         <div className="navbar-brand">
           <Link
             to="/"
-            className={`navbar-item ${path === '/' ? 'is-active' : ''}`}
+            className={`navbar-item ${isHome ? 'is-active' : ''}`}
             data-cy="HomeLink"
           >
             Home
@@ -21,7 +22,7 @@ export const NavBar = () => {
 
           <Link
             to="/tabs"
-            className={`navbar-item ${path.startsWith('/tabs') ? 'is-active' : ''}`}
+            className={`navbar-item ${isTabs ? 'is-active' : ''}`}
             data-cy="TabsLink"
           >
             Tabs
